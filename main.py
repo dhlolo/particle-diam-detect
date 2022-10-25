@@ -37,6 +37,8 @@ def analyse_particle_diam(filepath):
     gray = cv2.cvtColor(content, cv2.COLOR_BGR2GRAY)
     # 使用自适应阈值分析进行图像二值化
     dst = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 101, 1)
+    # Canny提取轮廓
+    dst = cv2.Canny(dst, 80, 200)
     # 形态学去噪
     element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
     dst = cv2.morphologyEx(dst, cv2.MORPH_OPEN, element)  # 开运算去噪
